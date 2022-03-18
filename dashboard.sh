@@ -5,9 +5,6 @@ if [[ ${1:-} = '-d' ]]; then
 	set -x
 fi
 
-echo hello, vik
-exit
-
 header() {
 	echo "$@" '----------------------------'
 	echo
@@ -16,9 +13,10 @@ header() {
 header "CPU AND MEMORY RESOURCES"
 
 load_average=$(uptime | awk '{ for (i=8; i <= 10; ++i) printf $i" "; print""}')
-echo "CPU Load Average:   " $load_average
 free_ram=$(cat /proc/meminfo | sed -n '2p' | awk '{ for (i=2; i <=4; ++i) printf $i" "; print""}')
-echo "Free RAM:" $free_ram
+echo "CPU Load Average:   " $load_average "Free RAM:" $free_ram 
+
+exit
 
 header "NETWORK CONNECTIONS"
 
