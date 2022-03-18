@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash -eux
 echo "CPU AND MEMORY RESOURCES ----------------------------"
 echo "      "
 echo "CPU Load Average:   "
