@@ -1,4 +1,12 @@
-#!/bin/bash -eux
+#!/bin/bash -eu
+
+# '-d' flag for debugging
+if [[ ${1:-} = '-d' ]]; then
+	set -x
+fi
+
+echo hello, vik
+exit
 
 header() {
 	echo "$@" '----------------------------'
@@ -7,10 +15,10 @@ header() {
 
 header "CPU AND MEMORY RESOURCES"
 
-echo "CPU Load Average:   "
-uptime | awk '{ for (i=8; i <= 10; ++i) printf $i" "; print""}'
-echo "Free RAM:"
-cat /proc/meminfo | sed -n '2p' | awk '{ for (i=2; i <=4; ++i) printf $i" "; print""}'
+load_average=$(uptime | awk '{ for (i=8; i <= 10; ++i) printf $i" "; print""}')
+echo "CPU Load Average:   " $load_average
+free_ram=$(cat /proc/meminfo | sed -n '2p' | awk '{ for (i=2; i <=4; ++i) printf $i" "; print""}')
+echo "Free RAM:" $free_ram
 
 header "NETWORK CONNECTIONS"
 
