@@ -12,9 +12,14 @@ header() {
 
 header "CPU AND MEMORY RESOURCES"
 
-load_average=$(uptime | awk '{ for (i=8; i <= 10; ++i) printf $i" "; print""}')
-free_ram=$(cat /proc/meminfo | sed -n '2p' | awk '{ for (i=2; i <=4; ++i) printf $i" "; print""}')
-echo "CPU Load Average:   " $load_average "Free RAM:" $free_ram 
+load_average="CPU Load Average: "
+load_average+=$(uptime | awk '{ for (i=8; i <= 10; ++i) printf $i" "; print""}')
+
+free_ram="Free Ram: "
+free_ram+=$(cat /proc/meminfo | sed -n '2p' | awk '{ for (i=2; i <=4; ++i) printf $i" "; print""}')
+
+# now split the page at column 40 using printf formatting
+printf "%-40s%s\n" "$load_average" "$free_ram"
 
 exit
 
