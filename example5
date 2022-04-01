@@ -3,20 +3,24 @@
 if [[ $* = "-d" ]]; then
 	set -x
 elif [[ $* = '' ]]; then
-	echo "run"
+	:
 else
 	echo "Usage: $0 [-d] "
 	exit 1
 fi
 
-exit 0
-echo "CPU AND MEMORY RESOURCES ----------------------------"
-echo "      "
+
+header() {
+	echo "$* --------------------------------"
+}
+header CPU AND MEMORY RESOURCES
 echo "CPU Load Average:   "
+
 uptime | awk '{ for (i=8; i <= 10; ++i) printf $i" "; print""}'
 echo "Free RAM:"
 cat /proc/meminfo | sed -n '2p' | awk '{ for (i=2; i <=4; ++i) printf $i" "; print""}'
 echo "    "
+exit 0
 echo "NETWORK CONNECTIONS ----------------------------------"
 echo "lo Bytes Received:"
 ifconfig | sed -n 14p | awk '{print $5}'
