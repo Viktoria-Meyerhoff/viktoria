@@ -21,7 +21,7 @@ echo "Free RAM:"
 cat /proc/meminfo | sed -n '2p' | awk '{ for (i=2; i <=4; ++i) printf $i" "; print""}'
 echo "    "
 exit 0
-echo "NETWORK CONNECTIONS ----------------------------------"
+header NETWORK CONNECTIONS 
 echo "lo Bytes Received:"
 ifconfig | sed -n 14p | awk '{print $5}'
 echo "lo Bytes Transmitted:"
@@ -40,7 +40,7 @@ else
         echo "no"
 fi
 echo "     "
-echo "ACCOUNT INFORMATION ----------------------------------"
+header ACCOUNT INFORMATION 
 echo "    "
 echo "Total Users:"
 cat /etc/passwd | wc -l 
@@ -54,7 +54,7 @@ cat /etc/passwd | grep /bin/bash | wc -l
 echo "/bin/false:"
 cat /etc/passwd | grep /bin/false | wc -l
 
-echo "Filesystem Information"
+header Filesystem Information
 echo "Total Number of Files"
 cd /
 echo */ | wc | awk '{print $3}'
