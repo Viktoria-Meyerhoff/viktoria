@@ -24,7 +24,7 @@ cat /proc/meminfo | sed -n '2p' | awk '{ for (i=2; i <=4; ++i) printf $i" "; pri
 
 exit 0
 header NETWORK CONNECTIONS 
-echo "lo Bytes Received:"
+printf "lo Bytes Received:"
 ifconfig | sed -n 14p | awk '{print $5}'
 echo "lo Bytes Transmitted:"
 ifconfig | sed -n 16p | awk '{print $5}'
